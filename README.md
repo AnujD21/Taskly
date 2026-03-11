@@ -1,55 +1,57 @@
-# 📝 Todo App — Full Stack Learning Project
+# 📝 Todo App
 
-A beginner-friendly full-stack web app built with **Node.js + Express** (backend) and **vanilla HTML/CSS/JS** (frontend).
+A clean, full-stack task management app where you can create, complete, and delete your daily tasks — all saved persistently on the server.
 
-## 🗂️ Project Structure
+## ✨ Features
+
+- **Add tasks** — Type a task and hit Enter or click Add
+- **Mark as done** — Click a task to toggle it complete/incomplete
+- **Delete tasks** — Remove tasks you no longer need
+- **Persistent storage** — Your todos are saved on the server, so they survive page refreshes
+- **REST API backend** — The frontend communicates with a real Node.js server over HTTP
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | HTML, CSS, Vanilla JavaScript |
+| Backend | Node.js, Express.js |
+| Data Storage | JSON file (`todos.json`) |
+
+## 📂 Project Structure
 
 ```
 todo-app/
-├── server.js       ← Backend server (Node.js + Express)
-├── package.json    ← Project config & dependencies
-├── todos.json      ← Database (stores todos as JSON)
+├── server.js        ← Express server & REST API
+├── package.json     ← Dependencies & scripts
+├── todos.json       ← Persistent data store
 └── public/
-    ├── index.html  ← Main webpage
-    ├── style.css   ← Styling
-    └── app.js      ← Frontend JavaScript (talks to backend)
+    ├── index.html   ← App UI
+    ├── style.css    ← Styling
+    └── app.js       ← Frontend logic (fetch calls to API)
 ```
 
-## 🚀 Run Locally
+## 🔌 API Endpoints
 
-**Requirements:** [Node.js](https://nodejs.org) must be installed.
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/todos` | Fetch all todos |
+| `POST` | `/api/todos` | Add a new todo |
+| `PATCH` | `/api/todos/:id` | Toggle a todo's completion |
+| `DELETE` | `/api/todos/:id` | Delete a todo |
 
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Start the server
-npm start
-
-# 3. Open in your browser
-# → http://localhost:3000
-```
-
-## 🌐 Deploy to Render.com (Free Hosting)
-
-1. Push your code to a GitHub repository
-2. Go to [render.com](https://render.com) → **New → Web Service**
-3. Connect your GitHub repo
-4. Set these settings:
-   - **Build Command:** `npm install`
-   - **Start Command:** `npm start`
-5. Click **Deploy** — your app will be live in ~2 minutes! 🎉
-
-## 📚 How Full Stack Works
+## 🧠 How It Works
 
 ```
 Browser (Frontend)
     │
-    │  fetch('/api/todos')   ← HTTP Requests
+    │  HTTP requests (fetch API)
     ▼
-Node.js Server (Backend)
+Node.js + Express (Backend)
     │
-    │  fs.readFile / fs.writeFile
+    │  Read / Write
     ▼
-todos.json (Database)
+todos.json (Data Store)
 ```
+
+The frontend never directly touches the data — it always goes through the API. This separation of concerns is the foundation of full-stack web development.
