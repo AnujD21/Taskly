@@ -17,6 +17,9 @@
   <div class="blob blob2"></div>
   <div class="blob blob3"></div>
 
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
   <div class="app-wrapper">
 
     <!-- ── Sidebar ─────────────────────────────── -->
@@ -64,6 +67,10 @@
 
       <!-- Header -->
       <header class="main-header">
+        <!-- Hamburger (mobile only) -->
+        <button class="hamburger" id="hamburgerBtn" onclick="openSidebar()" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
         <div class="header-left">
           <h1 id="filterTitle">All Tasks</h1>
           <p class="header-date" id="headerDate"></p>
@@ -110,5 +117,21 @@
   <div class="toast" id="toast"></div>
 
   <script src="app.js"></script>
+  <script>
+    function openSidebar() {
+      document.querySelector('.sidebar').classList.add('open');
+      document.getElementById('sidebarOverlay').classList.add('visible');
+    }
+    function closeSidebar() {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('visible');
+    }
+    // Close sidebar when a nav item is tapped on mobile
+    document.querySelectorAll('.nav-item').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (window.innerWidth <= 768) closeSidebar();
+      });
+    });
+  </script>
 </body>
 </html>

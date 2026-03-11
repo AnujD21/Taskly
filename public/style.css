@@ -409,3 +409,170 @@ html, body {
   60%       { transform: translateX(-5px); }
   80%       { transform: translateX(5px); }
 }
+
+/* ─── Hamburger Button (hidden on desktop) ────────────────── */
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  cursor: pointer;
+  padding: 7px;
+  transition: border-color var(--t), color var(--t), background var(--t);
+  flex-shrink: 0;
+}
+.hamburger:hover { border-color: var(--border-hover); color: var(--text); }
+
+/* Overlay behind sidebar on mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 90;
+  backdrop-filter: blur(2px);
+}
+.sidebar-overlay.visible { display: block; }
+
+/* ─── Mobile / Tablet Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+  html, body {
+    overflow: hidden; /* keep a single scroll context */
+  }
+
+  /* App becomes a column */
+  .app-wrapper {
+    flex-direction: column;
+    height: 100dvh; /* dynamic viewport height for mobile browsers */
+  }
+
+  /* Sidebar slides in as a drawer from the left */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 270px;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 24px 16px;
+    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Show hamburger */
+  .hamburger { display: flex; }
+
+  /* Mobile top bar */
+  .main {
+    padding: 0;
+    gap: 0;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .main-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .main-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .header-date {
+    font-size: 0.72rem;
+  }
+
+  /* Push clear-btn to far right */
+  .header-left {
+    flex: 1;
+  }
+
+  .clear-btn {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    gap: 4px;
+    white-space: nowrap;
+  }
+  .clear-btn svg { width: 12px; height: 12px; }
+
+  /* Add task bar */
+  .add-task-bar {
+    margin: 12px 16px 0;
+    padding: 4px 4px 4px 14px;
+    border-radius: var(--radius);
+    gap: 8px;
+  }
+
+  #todoInput {
+    font-size: 0.88rem;
+    padding: 9px 0;
+  }
+
+  .add-btn {
+    padding: 9px 14px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+
+  /* Task list scrolls inside the remaining space */
+  .task-list-wrapper {
+    margin: 12px 16px 0;
+    padding-right: 0;
+    overflow-y: auto;
+    flex: 1;
+    padding-bottom: 16px;
+  }
+
+  /* Give main a flex layout for child stacking */
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Slightly smaller task items */
+  .task-item {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .task-text {
+    font-size: 0.88rem;
+  }
+
+  /* Blobs — scale down to avoid massive blur on mobile */
+  .blob1 { width: 300px; height: 300px; top: -100px; left: -100px; }
+  .blob2 { width: 220px; height: 220px; }
+  .blob3 { width: 180px; height: 180px; }
+
+  /* Toast */
+  .toast {
+    width: calc(100% - 32px);
+    left: 16px;
+    right: 16px;
+    transform: translateX(0) translateY(80px);
+    bottom: 16px;
+    white-space: normal;
+    text-align: center;
+  }
+  .toast.show {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* ─── Very small screens (≤ 380px) ────────────────────────── */
+@media (max-width: 380px) {
+  .sidebar { width: 240px; }
+  .main-header h1 { font-size: 1.1rem; }
+  .add-btn { padding: 8px 10px; font-size: 0.75rem; }
+}
